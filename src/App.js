@@ -1,44 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { ButtonToolbar, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './Login';
+import Home from './Home';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { apiResponse: '' };
-    }
-
-    callAPI() {
-        fetch('http://localhost:9000/testAPI')
-            .then(res => res.text())
-            .then(res => this.setState({ apiResponse: res }));
-    }
-
-    componentWillMount() {
-        this.callAPI();
+        this.state = {
+            apiResponse: '',
+        };
     }
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">{this.state.apiResponse}</p>
-                <ButtonToolbar>
-                    <Button variant="primary" size="lg">
-                        Large button
-                    </Button>
-                    <Button variant="secondary" size="lg">
-                        Large button
-                    </Button>
-                </ButtonToolbar>
-
+            <Router>
+            <div>
+                <Navbar bg="light" expand="lg">
+                    <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="/" >Home</Nav.Link>
+                            <Nav.Link href="/login">Login</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/login" component={Login} />
             </div>
+            </Router>
+
         );
     }
 }
