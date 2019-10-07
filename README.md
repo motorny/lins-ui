@@ -1,4 +1,4 @@
-#LINS
+# LINS
 
 ### "Getting started" interactive creator
 
