@@ -12,6 +12,7 @@ class Login extends Component {
             password: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGetUsers = this.handleGetUsers.bind(this);
     }
 
     handleChange = event => {
@@ -22,7 +23,7 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:9000/register' , {
+        fetch('http://localhost:9000/users' , {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
@@ -30,6 +31,17 @@ class Login extends Component {
             body: JSON.stringify(this.state),
         })
             .then((result) => result.json())
+            .then((info) => { console.log(info); })
+    }
+
+    handleGetUsers(event) {
+        event.preventDefault();
+        fetch('http://localhost:9000/users', {
+                method: "GET",
+                headers: {
+                'Content-type': 'application/json'
+            }
+        }).then((result) => result.json())
             .then((info) => { console.log(info); })
     }
 
@@ -54,6 +66,9 @@ class Login extends Component {
 
             <Button variant="primary" type="submit">
                 Submit
+            </Button>
+            <Button variant="primary" onClick={this.handleGetUsers}>
+                TEMP_GET_USERS
             </Button>
         </Form>
         );
