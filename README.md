@@ -1,23 +1,29 @@
 #LINS
 
-### "Getting started" interactive creator
+## To start development
 
-## Available Scripts
+### Install dependencies
+```shell script
+npm install
+```
+
 
 ### Run dev server locally:
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+```shell script
+npm start
 ```
-yarn start
+
+
+## Build to a static files
+
+When You are ready to publish your work to Produciton, build a bundle:
+```shell script
+npm run build
 ```
-
-
-### Build to a static files
-
 Check complied site at `build/` folder. Copy it to your server and serve with static server
 
-```
-yarn build
-```
+
