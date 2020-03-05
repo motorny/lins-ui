@@ -33,8 +33,15 @@ class Login extends Component {
             body: JSON.stringify(this.state),
         })
             .then((result) => result.json())
-            .then((info) => { console.log(info); })
-        // THEN GOTO PROFILE?
+            .then((info) => {
+                if(info.token) {
+                    this.props.history.push({
+                        pathname: '/profile',
+                        state: { token: info.token }
+                    });
+                }
+                console.log(info);
+            });
     }
 
     render() {

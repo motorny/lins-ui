@@ -3,6 +3,7 @@ import {Container} from "react-bootstrap";
 import ItemsListContainer from './ItemsListContainer';
 import {Switch, Route} from "react-router-dom";
 import Login from "./Login";
+import Profile from './Profile';
 
 class Main extends Component {
 
@@ -14,6 +15,7 @@ class Main extends Component {
                     <ItemsListContainer data={this.props.data}/>
                 </Container>)}/>
                 <Route path='/login' component={Login}/>
+                <Route path='/profile' component={Profile}/>
             </Switch>
         );
     }
