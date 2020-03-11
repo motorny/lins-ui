@@ -7,6 +7,9 @@ const instance = axios.create({
 });
 
 
-export function getItems() {
+export function getItems(filter) {
+    if (filter) {
+        return instance.get(`${baseURL}/items?filter=${filter}`);
+    }
     return instance.get(`${baseURL}/items`);
 }

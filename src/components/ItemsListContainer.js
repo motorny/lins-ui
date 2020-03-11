@@ -2,29 +2,39 @@ import React, {Component} from "react";
 import ItemCard from "./ItemCard";
 import {getItems} from "../Api";
 
+
 class ItemsListContainer extends Component {
     state = {
         data: null,
     };
 
-    getData = async () => {
-        const items = await getItems();
-        this.setState({ data: items.data.items });
+
+    getData = async (filter) => {
+        const items = await getItems(filter);
+        this.setState({data: items.data.items});
     };
 
-    componentDidMount() {
-        this.getData();
+    componentDidUpdate(prevProps) {
+        if (prevProps.filter !== this.props.filter) {
+            this.getData(this.props.filter);
+        }
     }
+
+    componentDidMount() {
+        this.getData(this.props.filter);
+    }
+
 
     render() {
         const itemsArr = this.state.data || [];
         return (
+
             <div>
-            { itemsArr.map(function(item, i){
+                {itemsArr.map(function (item, i) {
                     return <ItemCard data={item} key={i}/>;
                 })}
             </div>
-            );
+        );
     }
 }
 
