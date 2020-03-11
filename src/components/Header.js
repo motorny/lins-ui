@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
-//import { BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import Login from "./Login";
 
 class Header extends Component {
     render() {
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/">LinS</Navbar.Brand>
+                <Navbar.Brand><Link to="/">LinS</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="basic-navsbar-nav">
                     <Nav className="mr-auto">
                     </Nav>
-                    <Button href="/login" variant="outline-info">Sign in</Button>
+                    <Link to="/login">Sign in</Link>
                 </Navbar.Collapse>
             </Navbar>
         );
