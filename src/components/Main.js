@@ -12,11 +12,11 @@ class Main extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={SearchContainer}/>
-                <Route path='/items' render={({data, location}) => {
+                <Route path='/items' render={({location}) => {
                     const params = new URLSearchParams(location.search);
                     return (<div>
                         <SearchContainer/>
-                        <ItemsListContainer data={data} filter={params.get("filter")}/>
+                        <ItemsListContainer filter={params.get("filter")}/>
                     </div>)
                 }}/>
                 <Route path='/login' component={Login}/>

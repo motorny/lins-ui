@@ -4,7 +4,7 @@ import {Button, Card, Image, Col, Row } from "react-bootstrap";
 
 class ItemCard extends Component {
     render() {
-        const item = this.props.data;
+        const item = this.props.item;
         return (
             <Card>
                 <Row>

@@ -7,9 +7,14 @@ const instance = axios.create({
 });
 
 
-export function getItems(filter) {
+export async function getItems(filter, offset, limit) {
+    let resp;
     if (filter) {
-        return instance.get(`${baseURL}/items?filter=${filter}`);
+        resp = await instance.get(`${baseURL}/items?filter=${filter}&offset=${offset}&limit=${limit}`);
+    } else {
+        resp = await instance.get(`${baseURL}/items?offset=${offset}&limit=${limit}`);
     }
-    return instance.get(`${baseURL}/items`);
+    if (resp.status === 200)
+        return resp.data;
+    return null;
 }
