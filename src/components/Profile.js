@@ -1,23 +1,27 @@
 import React, {Component} from "react";
+import Cookie from 'js-cookie';
 
 class Profile extends Component {
 
     constructor(props) {
         super(props);
-        let token = 'Go login first you silly goose';
-        if(props.location.state) {
-            this.state = {
-                token: props.location.state.token
-            };
-        }
-        else this.state = {
-            token: token
+        this.state = {
+            token: 'not signed in',
         };
+    }
+
+    componentDidMount() {
+        if(Cookie.get('token')) {
+            console.log('token acquired');
+            this.setState({
+                token: Cookie.get('token')
+            });
+        }
     }
 
     render() {
         return (
-            <h1> {this.state.token}</h1>
+            <h1> Token that is saved in cookies: {this.state.token}</h1>
         );
     }
 }

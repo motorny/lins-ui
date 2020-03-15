@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Cookie from 'js-cookie';
 
 class Login extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class Login extends Component {
                         pathname: '/profile',
                         state: { token: info.token }
                     });
+                    Cookie.set('token', info.token);
                 }
                 console.log(info);
             });
