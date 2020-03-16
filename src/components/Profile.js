@@ -10,18 +10,9 @@ class Profile extends Component {
         };
     }
 
-    componentDidMount() {
-        if(Cookie.get('token')) {
-            console.log('token acquired');
-            this.setState({
-                token: Cookie.get('token')
-            });
-        }
-    }
-
     render() {
         return (
-            <h1> Token that is saved in cookies: {this.state.token}</h1>
+            <h1> Token that is saved in cookies: {Cookie.get('token')}</h1>
         );
     }
 }

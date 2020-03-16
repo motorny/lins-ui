@@ -2,33 +2,28 @@ import React, { Component } from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            signedIn: 0,
-            activeLink: '/login',
-            activeName: 'Sign In',
+            signedIn: this.props.signedIn,
+            activeLink: this.props.activeLink,
+            activeName: this.props.activeName,
         };
-        this.switchLinkDynamically = this.switchLinkDynamically.bind(this);
     }
 
-    componentDidMount() {
-        this.switchLinkDynamically();
-    }
-
-    switchLinkDynamically(){
-        if(Cookies.get('token')){
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.signedIn !== prevProps.signedIn) {
             this.setState({
-                signedIn: 1,
-                activeLink: '/profile',
-                activeName: 'My Profile',
-            });
-            console.log('link changed');
+                    signedIn: this.props.signedIn,
+                    activeLink: this.props.activeLink,
+                    activeName: this.props.activeName,
+                }
+            );
         }
     }
+
 
     render() {
         return (

@@ -6,7 +6,12 @@ import Profile from './Profile';
 import SearchContainer from './SearchContainer';
 
 class Main extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+          callback: this.props.callbackFromParent,
+        };
+    }
 
     render() {
         return (
@@ -19,7 +24,7 @@ class Main extends Component {
                         <ItemsListContainer filter={params.get("filter")}/>
                     </div>)
                 }}/>
-                <Route path='/login' component={Login}/>
+                <Route path='/login' render={(props) => <Login {...props} callback={this.state.callback} />}/>
                 <Route path='/profile' component={Profile}/>
             </Switch>
         );

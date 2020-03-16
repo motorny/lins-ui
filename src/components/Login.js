@@ -14,6 +14,7 @@ class Login extends Component {
         this.state = {
             login: '',
             password: '',
+            callback: this.props.callback,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,6 +42,7 @@ class Login extends Component {
                         state: { token: info.token }
                     });
                     Cookie.set('token', info.token);
+                    this.state.callback();
                 }
                 console.log(info);
             });
