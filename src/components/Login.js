@@ -38,10 +38,11 @@ class Login extends Component {
             .then((info) => {
                 if(info.token) {
                     this.props.history.push({
-                        pathname: '/profile',
+                        pathname: '/profile/' + info.user_id,
                         state: { token: info.token }
                     });
                     Cookie.set('token', info.token);
+                    Cookie.set('user_id', info.user_id);
                     this.state.callback();
                 }
                 console.log(info);

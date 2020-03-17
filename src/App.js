@@ -24,12 +24,16 @@ class App extends Component {
         if(Cookies.get('token')){
             this.setState({
                 signedIn: 1,
-                activeLink: '/profile',
+                activeLink: '/profile/' + Cookies.get('user_id'),
                 activeName: 'My Profile',
             });
             console.log('i got it');
             console.log(this.state);
         }
+    }
+
+    componentDidMount() {
+        this.myCallback();
     }
 
     render() {
