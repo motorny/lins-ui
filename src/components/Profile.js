@@ -29,7 +29,8 @@ class Profile extends Component {
         //Cookie.get('token');
     }
 
-    componentWillMount() {
+
+    componentWillReceiveProps(nextProps, nextContext) {
         const user_id = this.props.history.location.pathname.match(/(\d+)/)[0];
         fetch('http://localhost:9000/profile/' + user_id , {
             method: "GET",
