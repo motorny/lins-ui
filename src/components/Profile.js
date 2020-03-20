@@ -1,8 +1,5 @@
 import React, {Component} from "react";
-import Cookie from 'js-cookie';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
-import './profile.css';
-import ItemsListContainer from "./ItemsListContainer";
 import pic from './bg1.jpg';
 import ItemCard from "./ItemCard";
 import PaginationContainer from "./PaginationContainer";
@@ -88,7 +85,7 @@ class Profile extends Component {
                     <MDBCol>
                         <div className="card">
                             <div className="card-header">
-                                Featured
+                                Items
                             </div>
                             <div className="card-body">
                                 <div>
