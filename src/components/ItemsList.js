@@ -31,11 +31,12 @@ class ItemsContainer extends Component {
                 prevState.perPage !== this.state.perPage) {
 
                 if (prevProps.loader !== this.props.loader)
-                    this.setState({offset:0});
+                    this.setState({offset: 0});
                 this.updateData();
             }
         } else {
-
+            if (prevProps.data !== this.props.data)
+                this.setState({offset: 0});
         }
     }
 
@@ -63,9 +64,20 @@ class ItemsContainer extends Component {
 
 
     render() {
-        const itemsData = this.state.data || {items: [], totalCnt: 0};
-        const pagesCnt = Math.max(1, Math.ceil(itemsData.totalCnt / this.state.perPage));
         const active = 1 + this.state.offset / this.state.perPage;
+        let itemsData, pagesCnt;
+        if (this.useLoader) {
+            itemsData = this.state.data || {items: [], totalCnt: 0};
+            pagesCnt = Math.max(1, Math.ceil(itemsData.totalCnt / this.state.perPage));
+        } else {
+            const itemsArr = this.props.data || [];
+            itemsData = {items: itemsArr, totalCnt: itemsArr.length};
+            if (this.props.pagination) {
+                itemsData.items = itemsData.items.slice(this.state.offset, this.state.offset + this.state.perPage);
+                pagesCnt = Math.max(1, Math.ceil(itemsData.totalCnt / this.state.perPage));
+            }
+        }
+        console.log('items list:', itemsData);
         return (
             <div>
                 {this.state.loading ?

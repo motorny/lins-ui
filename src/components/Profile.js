@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
-import ItemCard from "./ItemCard";
-import Paginator from "./Paginator";
+import ItemsList from "./ItemsList";
 
 class Profile extends Component {
 
@@ -55,10 +54,6 @@ class Profile extends Component {
             });
     }
 
-    paginate = (page) => {
-        const offset = (page - 1) * this.state.perPage;
-        this.setState({offset});
-    };
 
     render() {
         return (
@@ -88,14 +83,7 @@ class Profile extends Component {
                                 Items
                             </div>
                             <div className="card-body">
-                                <div>
-                                    <div>
-                                        {this.state.items.map(function (item, i) {
-                                            return <ItemCard item={item} key={i}/>;
-                                        })}
-                                    </div>
-                                    <Paginator total={this.state.pagesCnt} paginate={this.paginate}/>
-                                </div>
+                                <ItemsList pagination={false} data={this.state.items}/>
                             </div>
                         </div>
                     </MDBCol>
