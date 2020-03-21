@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import ItemsListContainer from './ItemsListContainer';
+import ItemsContainer from './ItemsContainer';
 import {Switch, Route} from "react-router-dom";
 import Login from "./Login";
 import Profile from './Profile';
-import SearchContainer from './SearchContainer';
+import SearchContainer from './SearchBar';
 
 class Main extends Component {
     constructor(props) {
@@ -17,13 +17,7 @@ class Main extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={SearchContainer}/>
-                <Route path='/items' render={({location}) => {
-                    const params = new URLSearchParams(location.search);
-                    return (<div>
-                        <SearchContainer/>
-                        <ItemsListContainer filter={params.get("filter")}/>
-                    </div>)
-                }}/>
+                <Route path='/items' component={ItemsContainer}/>
                 <Route path='/login' render={(props) => <Login {...props} callback={this.state.callback} />}/>
                 <Route path='/profile' component={Profile}/>
             </Switch>

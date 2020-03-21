@@ -1,19 +1,7 @@
 import React, {Component} from "react";
 import {Pagination} from "react-bootstrap";
 
-class PaginationContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            active: props.active || 1
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.total !== this.props.total) {
-            this.setState({active: 1});
-        }
-    }
+class Paginator extends Component {
 
     render() {
         const items = [];
@@ -22,8 +10,7 @@ class PaginationContainer extends Component {
                 <Pagination.Item onClick={() => {
                     this.props.paginate(number);
                     this.setState({active: number})
-                }} key={number}
-                                 active={number === this.state.active}>
+                }} key={number} active={number === this.props.active}>
                     {number}
                 </Pagination.Item>,
             );
@@ -38,4 +25,4 @@ class PaginationContainer extends Component {
     }
 }
 
-export default PaginationContainer;
+export default Paginator;

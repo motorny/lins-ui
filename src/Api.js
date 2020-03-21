@@ -8,12 +8,13 @@ const instance = axios.create({
 
 
 export async function getItems(filter, offset, limit) {
-    let resp;
-    if (filter) {
-        resp = await instance.get(`${baseURL}/items?filter=${filter}&offset=${offset}&limit=${limit}`);
-    } else {
-        resp = await instance.get(`${baseURL}/items?offset=${offset}&limit=${limit}`);
-    }
+    let queryUrl = `${baseURL}/items?offset=${offset || 0}`;
+    if (limit)
+        queryUrl = queryUrl + `&limit=${limit}`;
+    if (filter)
+        queryUrl = queryUrl + `&filter=${filter}`;
+
+    const resp = await instance.get(queryUrl);
     if (resp.status === 200)
         return resp.data;
     return null;

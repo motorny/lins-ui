@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
 import ItemCard from "./ItemCard";
-import PaginationContainer from "./PaginationContainer";
+import Paginator from "./Paginator";
 
 class Profile extends Component {
 
@@ -94,7 +94,7 @@ class Profile extends Component {
                                             return <ItemCard item={item} key={i}/>;
                                         })}
                                     </div>
-                                    <PaginationContainer total={this.state.pagesCnt} paginate={this.paginate}/>
+                                    <Paginator total={this.state.pagesCnt} paginate={this.paginate}/>
                                 </div>
                             </div>
                         </div>

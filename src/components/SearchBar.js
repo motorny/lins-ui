@@ -5,37 +5,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from "react-bootstrap/Form";
 import {withRouter} from 'react-router-dom';
 
-class SearchContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filter: '',
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+class SearchBar extends Component {
+    state = {
+        searchStr: ""
+    };
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         });
+        this.props.onSearchChange(event.target.value, false);
     };
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
-
-        this.props.history.push({
-            pathname: '/items',
-            search: '?filter=' + this.state.filter,
-        });
-
-    }
+        this.props.onSearchChange(this.state.searchStr, true);
+    };
 
     render() {
         return (
             <Form inline onSubmit={this.handleSubmit}>
                 <Form.Control type="text" placeholder="Search"
-                              id="filter"
-                              value={this.state.filter}
+                              id="searchStr"
+                              value={this.state.searchStr}
                               onChange={this.handleChange}/>
                 <Button type="submit" variant="outline-success">Search</Button>
             </Form>
@@ -43,4 +35,4 @@ class SearchContainer extends Component {
     }
 }
 
-export default withRouter(SearchContainer);
+export default withRouter(SearchBar);
