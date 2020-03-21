@@ -3,7 +3,7 @@ import ItemsContainer from './ItemsContainer';
 import {Switch, Route} from "react-router-dom";
 import Login from "./Login";
 import Profile from './Profile';
-import SearchContainer from './SearchBar';
+import SearchContainer from './SearchContainer';
 
 class Main extends Component {
     constructor(props) {

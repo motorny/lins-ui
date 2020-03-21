@@ -77,7 +77,6 @@ class ItemsContainer extends Component {
                 pagesCnt = Math.max(1, Math.ceil(itemsData.totalCnt / this.state.perPage));
             }
         }
-        console.log('items list:', itemsData);
         return (
             <div>
                 {this.state.loading ?
