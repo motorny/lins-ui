@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import {Button, Card, Image, Col, Row } from "react-bootstrap";
+import {Button, Card, Image, Col, Row} from "react-bootstrap";
 
+import {Link} from 'react-router-dom';
 
 class ItemCard extends Component {
     render() {
@@ -17,13 +18,13 @@ class ItemCard extends Component {
                             <Card.Text>
                                 {item.description || 'No description so far...'}
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Link to={`/items/${this.props.item.id}`}><Button variant="primary">View it!</Button></Link>
                         </Card.Body>
                     </Col>
                 </Row>
             </Card>
-    );
+        );
     }
-    }
+}
 
 export default ItemCard;

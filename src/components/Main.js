@@ -4,6 +4,7 @@ import {Switch, Route} from "react-router-dom";
 import Login from "./Login";
 import Profile from './Profile';
 import SearchContainer from './SearchContainer';
+import ItemDetailedContainer from "./ItemDetailedContainer";
 
 class Main extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Main extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={SearchContainer}/>
+                <Route path='/items/:id' component={ItemDetailedContainer}/>
                 <Route path='/items' component={ItemsContainer}/>
                 <Route path='/login' render={(props) => <Login {...props} callback={this.state.callback} />}/>
                 <Route path='/profile' component={Profile}/>

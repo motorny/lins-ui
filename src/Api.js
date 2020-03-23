@@ -19,3 +19,11 @@ export async function getItems(filter, offset, limit) {
         return resp.data;
     return null;
 }
+
+export async function getItemDetails(itemID) {
+    let queryUrl = `${baseURL}/items/${itemID}`;
+    const resp = await instance.get(queryUrl);
+    if (resp.status === 200)
+        return resp.data;
+    return null;
+}
