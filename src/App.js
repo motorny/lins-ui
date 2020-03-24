@@ -4,7 +4,7 @@ import './App.css';
 import {BrowserRouter} from 'react-router-dom';
 import Main from './components/Main.js'
 import Header from './components/Header.js'
-import {Container} from "react-bootstrap";
+import {MDBContainer} from "mdbreact";
 import Cookies from 'js-cookie';
 
 class App extends Component {
@@ -40,9 +40,9 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header signedIn={this.state.signedIn} activeLink={this.state.activeLink} activeName={this.state.activeName}/>
-                    <Container>
+                    <MDBContainer className="mt-5 pt-5">
                         <Main callbackFromParent={this.myCallback}/>
-                    </Container>
+                    </MDBContainer>
                 </div>
             </BrowserRouter>
         );

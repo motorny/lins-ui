@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
-import {Button} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from "react-bootstrap/Form";
 import {withRouter} from 'react-router-dom';
-
+import {MDBInputGroup, MDBBtn} from 'mdbreact'
 class SearchBar extends Component {
     state = {
         searchStr: ""
@@ -24,13 +21,16 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <Form inline onSubmit={this.handleSubmit}>
-                <Form.Control type="text" placeholder="Search"
-                              id="searchStr"
-                              value={this.state.searchStr}
-                              onChange={this.handleChange}/>
-                <Button type="submit" variant="outline-success">Search</Button>
-            </Form>
+            <form onSubmit={this.handleSubmit}>
+                <MDBInputGroup
+                    append={<MDBBtn type="submit" size="sm" className="m-0 px-3 py-2 z-depth-0">Search</MDBBtn>}
+                    inputs={
+                        <input size="lg" type="text" id="searchStr" className="form-control" placeholder="Search"
+                               value={this.state.searchStr}
+                               onChange={this.handleChange}/>
+                    }
+                />
+            </form>
         );
     }
 }

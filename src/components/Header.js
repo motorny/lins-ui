@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink} from 'mdbreact';
+import {Link} from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {
@@ -27,16 +26,27 @@ class Header extends Component {
 
     render() {
         return (
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand><Link to="/">LinS</Link></Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navsbar-nav">
-                    <Nav className="mr-auto">
-                    </Nav>
-                    <Link to={this.state.activeLink}>{this.state.activeName}</Link>
-                </Navbar.Collapse>
-            </Navbar>
+            <header>
+                <MDBNavbar style={{backgroundColor: "#FFFFFF"}} light expand="md" fixed="top" scrolling>
+                    <Link to="/"><MDBNavbarBrand>LinS</MDBNavbarBrand></Link>
+                    <MDBNavbarToggler/>
+                    <MDBCollapse isOpen={this.state.collapse} navbar>
+                        <MDBNavbarNav left>
+                            <MDBNavItem>
+                                <MDBNavLink to="/items">Items</MDBNavLink>
+                            </MDBNavItem>
+                        </MDBNavbarNav>
+
+                        <MDBNavbarNav right>
+                            <MDBNavItem>
+                                <MDBNavLink to={this.state.activeLink}>{this.state.activeName}</MDBNavLink>
+                            </MDBNavItem>
+                        </MDBNavbarNav>
+                    </MDBCollapse>
+                </MDBNavbar>
+            </header>
         );
     }
 }
+
 export default Header;

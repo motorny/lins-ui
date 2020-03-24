@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Pagination} from "react-bootstrap";
+import {MDBPagination, MDBPageItem, MDBPageNav} from 'mdbreact';
 
 class Paginator extends Component {
 
@@ -7,18 +7,18 @@ class Paginator extends Component {
         const items = [];
         for (let number = 1; number <= this.props.total; number++) {
             items.push(
-                <Pagination.Item onClick={() => {
+                <MDBPageItem onClick={() => {
                     this.props.paginate(number);
                     this.setState({active: number})
                 }} key={number} active={number === this.props.active}>
-                    {number}
-                </Pagination.Item>,
+                    <MDBPageNav>{number}</MDBPageNav>
+                </MDBPageItem>,
             );
         }
 
         return (
             <div>
-                <Pagination>{items}</Pagination>
+                <MDBPagination size="lg">{items}</MDBPagination>
                 <br/>
             </div>
         );

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import ItemCard from "./ItemCard";
 import Paginator from "./Paginator";
-import Spinner from "react-bootstrap/Spinner";
 
 class ItemsContainer extends Component {
     static defaultProps = {
@@ -82,9 +81,9 @@ class ItemsContainer extends Component {
                 {this.state.loading ?
                     (
                         <div>
-                            <Spinner animation="border" variant="success" role="status">
+                            <div className="spinner-border text-success" role="status">
                                 <span className="sr-only">Loading...</span>
-                            </Spinner>
+                            </div>
                             Loading...
                         </div>
                     ) : (

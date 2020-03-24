@@ -1,0 +1,8 @@
+.item-card-title {
+    color: black;
+    text-decoration: inherit;
+}
+
+.item-card-title:hover {
+    color: black;
+}
