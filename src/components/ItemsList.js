@@ -95,7 +95,9 @@ class ItemsContainer extends Component {
                     )
                 }
                 {this.props.pagination &&
-                <Paginator total={pagesCnt} paginate={this.paginate} active={active}/>}
+                <div className="d-flex justify-content-center">
+                    <Paginator total={pagesCnt} paginate={this.paginate} active={active}/>
+                </div>}
             </div>
         );
     }

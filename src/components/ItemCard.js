@@ -16,7 +16,7 @@ class ItemCard extends Component {
     render() {
         const item = this.props.item;
         return (
-            <MDBCard className="flex-row flex-wrap my-3">
+            <MDBCard className="d-flex flex-row flex-wrap my-3">
                 <Link to={`/items/${this.props.item.id}`}><MDBCardImage className="img-fluid"
                                                                         src={`http://127.0.0.1:9000${item.image_url}`}
                                                                         alt=""/></Link>
