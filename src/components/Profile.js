@@ -3,6 +3,7 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
 import ItemsList from "./ItemsList";
 
+
 class Profile extends Component {
 
     constructor(props) {

@@ -5,13 +5,15 @@ import {
     MDBCol,
     MDBView,
     MDBCard,
-    MDBCardImage, MDBTable, MDBTableBody,
+    MDBTable,
+    MDBTableBody,
     MDBCardBody,
-    MDBCardTitle,MDBBadge,
-    MDBCardText, MDBBtn
+    MDBCardTitle,
+    MDBBadge,
+    MDBCardText,
 } from 'mdbreact';
-import {Link} from "react-router-dom";
 import './ItemDetailed.css'
+import ProfileHover from "./ProfileHover";
 
 class ItemDetailed extends Component {
 
@@ -33,24 +35,24 @@ class ItemDetailed extends Component {
                         <MDBCardBody className="px-sm-0">
                             <MDBCardTitle style={{fontSize: "2em"}}>{this.props.item.name}</MDBCardTitle>
                             <MDBContainer className="mx-0 px-0">
-                            <MDBTable responsiveMd borderless className="right-details" >
-                                <MDBTableBody>
-                                    <tr>
-                                        <td className="field-name align-text-bottom">Belongs to</td>
-                                        <td>{this.props.item.owner.username}</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td className="field-name">Located in</td>
-                                        <td>{this.props.item.location}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="field-name">Status</td>
-                                        <td>{this.props.item.status === 'free'? <MDBBadge color="success">Free</MDBBadge>
-                                        :<MDBBadge  color="danger">Occupied</MDBBadge>}</td>
-                                    </tr>
-                                </MDBTableBody>
-                            </MDBTable>
+                                <MDBTable responsiveMd borderless className="right-details">
+                                    <MDBTableBody>
+                                        <tr>
+                                            <td className="field-name align-text-bottom">Belongs to</td>
+                                            <td><ProfileHover user={this.props.item.owner}/></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="field-name">Located in</td>
+                                            <td>{this.props.item.location}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="field-name">Status</td>
+                                            <td>{this.props.item.status === 'free' ?
+                                                <MDBBadge color="success">Free</MDBBadge>
+                                                : <MDBBadge color="danger">Occupied</MDBBadge>}</td>
+                                        </tr>
+                                    </MDBTableBody>
+                                </MDBTable>
                             </MDBContainer>
                         </MDBCardBody>
 
