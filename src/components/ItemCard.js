@@ -9,7 +9,7 @@ class ItemCard extends Component {
             <Card>
                 <Row>
                     <Col md={2}>
-                        <Image src={`http://127.0.0.1:9000${item.image_url}`} fluid/>
+                        <Image src={`http://127.0.0.1:9000/${item.image}`} fluid/>
                     </Col>
                     <Col md={10}>
                         <Card.Body>
