@@ -41,7 +41,7 @@ class Profile extends Component {
                 const i_pagesCnt = Math.max(1,Math.ceil(info.items.length / this.state.perPage));
                 this.setState({
                     user_id: user_id,
-                    avatar: info.user.image_url,
+                    avatar: info.user.image,
                     gradientPic: pic, //TODO
                     username: info.user.username,
                     location: info.user.location,
