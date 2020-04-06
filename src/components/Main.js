@@ -5,6 +5,8 @@ import Login from "./Login";
 import Profile from './Profile';
 import SearchContainer from './SearchContainer';
 import ItemDetailedContainer from "./ItemDetailedContainer";
+import AddItemForm from "./AddItemForm";
+
 
 class Main extends Component {
     constructor(props) {
@@ -22,6 +24,7 @@ class Main extends Component {
                 <Route path='/items' component={ItemsContainer}/>
                 <Route path='/login' render={(props) => <Login {...props} callback={this.state.callback} />}/>
                 <Route path='/profile' component={Profile}/>
+                <Route path='/additem' component={AddItemForm}/>
             </Switch>
         );
     }

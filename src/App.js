@@ -6,6 +6,8 @@ import Main from './components/Main.js'
 import Header from './components/Header.js'
 import {MDBContainer} from "mdbreact";
 import Cookies from 'js-cookie';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
 
@@ -42,6 +44,7 @@ class App extends Component {
                     <Header signedIn={this.state.signedIn} activeLink={this.state.activeLink} activeName={this.state.activeName}/>
                     <MDBContainer className="mt-5 pt-5">
                         <Main callbackFromParent={this.myCallback}/>
+                        <ToastContainer hideProgressBar={true}/>
                     </MDBContainer>
                 </div>
             </BrowserRouter>

@@ -6,3 +6,7 @@
 .item-card-title:hover {
     color: black;
 }
+
+.item-card-image {
+    width: 250px;
+}

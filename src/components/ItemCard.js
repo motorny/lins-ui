@@ -9,6 +9,7 @@ import {
 } from "mdbreact";
 import {Link} from 'react-router-dom';
 import './ItemCard.css';
+import {getImageUrl} from "../Api";
 
 class ItemCard extends Component {
     image_url;
@@ -17,8 +18,8 @@ class ItemCard extends Component {
         const item = this.props.item;
         return (
             <MDBCard className="d-flex flex-row flex-wrap my-3">
-                <Link to={`/items/${this.props.item.id}`}><MDBCardImage className="img-fluid"
-                                                                        src={`http://127.0.0.1:9000${item.image_url}`}
+                <Link to={`/items/${this.props.item.id}`}><MDBCardImage className="img-fluid item-card-image"
+                                                                        src={getImageUrl(item.image_url)}
                                                                         alt=""/></Link>
                 <MDBCardBody>
                     <MDBCardTitle ><Link className="item-card-title" to={`/items/${this.props.item.id}`}>{item.name}</Link></MDBCardTitle>

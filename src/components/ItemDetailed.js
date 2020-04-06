@@ -14,6 +14,7 @@ import {
 } from 'mdbreact';
 import './ItemDetailed.css'
 import ProfileHover from "./ProfileHover";
+import {getImageUrl} from "../Api";
 
 class ItemDetailed extends Component {
 
@@ -21,13 +22,12 @@ class ItemDetailed extends Component {
     render() {
         if (!this.props.item)
             return (<span>Loading...</span>);
-        console.log(this.props.item);
         return (
             <MDBCard>
                 <MDBRow>
                     <MDBCol sm="4" className="d-flex">
                         <MDBView hover zoom rounded className="w-100">
-                            <img src={`http://127.0.0.1:9000${this.props.item.image_url}`} className="img-fluid"
+                            <img src={getImageUrl(this.props.item.image_url)} className="img-fluid"
                                  alt="" style={{width: "100%"}}/>
                         </MDBView>
                     </MDBCol>

@@ -10,49 +10,9 @@ import {Link} from 'react-router-dom';
 import TooltipTrigger from 'react-popper-tooltip';
 import 'react-popper-tooltip/dist/styles.css';
 import './ProfileHover.css'
+import {getImageUrl} from "../Api";
 
 
-// const Tooltip = ({children, tooltip, hideArrow, ...props}) => (
-//     <TooltipTrigger
-//         {...props}
-//         tooltip={({
-//                       arrowRef,
-//                       tooltipRef,
-//                       getArrowProps,
-//                       getTooltipProps,
-//                       placement
-//                   }) => (
-//             <div
-//                 {...getTooltipProps({
-//                     ref: tooltipRef,
-//                     className: 'tooltip-container'
-//                 })}
-//             >
-//                 {!hideArrow && (
-//                     <div
-//                         {...getArrowProps({
-//                             ref: arrowRef,
-//                             className: 'tooltip-arrow',
-//                             'data-placement': placement
-//                         })}
-//                     />
-//                 )}
-//                 {tooltip}
-//             </div>
-//         )}
-//     >
-//         {({getTriggerProps, triggerRef}) => (
-//             <span
-//                 {...getTriggerProps({
-//                     ref: triggerRef,
-//                     className: 'trigger'
-//                 })}
-//             >
-//         {children}
-//       </span>
-//         )}
-//     </TooltipTrigger>
-// );
 
 class Tooltip extends Component {
 
@@ -91,7 +51,7 @@ class ProfileHover extends Component {
                 <MDBCard className="d-flex flex-row flex-wrap my-3">
                     <Link to={`/profile/${user.id}`}><MDBCardImage style={{height: "100px"}}
                                                                    className="img-fluid"
-                                                                   src={`http://127.0.0.1:9000${user.image_url}`}
+                                                                   src={getImageUrl(user.image_url)}
                                                                    alt=""/></Link>
                     <MDBCardBody>
                         <MDBCardTitle><Link className="profile-hover-card-title"

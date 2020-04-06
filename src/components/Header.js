@@ -35,6 +35,9 @@ class Header extends Component {
                             <MDBNavItem>
                                 <MDBNavLink to="/items">Items</MDBNavLink>
                             </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/additem">Add new item</MDBNavLink>
+                            </MDBNavItem>
                         </MDBNavbarNav>
 
                         <MDBNavbarNav right>
