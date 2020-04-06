@@ -1,23 +1,12 @@
 import React, {Component} from "react";
 import {
     MDBContainer,
-    MDBRow,
-    MDBCol,
-    MDBView,
-    MDBCard,
-    MDBTable,
-    MDBTableBody,
-    MDBCardBody,
-    MDBCardTitle,
-    MDBBadge,
-    MDBCardText,
-    MDBInput,
     MDBIcon,
     MDBBtn,
-    MDBFileInput,
 } from 'mdbreact';
 import './ItemDetailed.css'
 import {addNewItem} from "../Api";
+import {toast} from "react-toastify";
 
 
 class AddItemForm extends Component {
@@ -29,7 +18,6 @@ class AddItemForm extends Component {
     };
 
      onSubmit = async (event) => {
-        console.log(this.fileInput.files[0]);
 
         const body = {
             name: this.state.name,
@@ -39,7 +27,12 @@ class AddItemForm extends Component {
         event.preventDefault();
 
         const resp = await addNewItem(body);
-        console.log(resp);
+         if (resp) {
+             toast.success(`Item created`);
+             this.props.history.push({
+                 pathname: '/items/' + resp.id,
+             });
+         }
     };
 
     onChangeName = (event) => {
@@ -48,7 +41,6 @@ class AddItemForm extends Component {
     reader;
     onFileRead = (e) => {
         const encodedImg = this.reader.result.split(',')[1];
-        console.log(encodedImg);
         this.setState({encodedImg});
     };
 

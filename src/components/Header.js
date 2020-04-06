@@ -3,26 +3,9 @@ import {MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, 
 import {Link} from 'react-router-dom';
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            signedIn: this.props.signedIn,
-            activeLink: this.props.activeLink,
-            activeName: this.props.activeName,
-        };
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.signedIn !== prevProps.signedIn) {
-            this.setState({
-                    signedIn: this.props.signedIn,
-                    activeLink: this.props.activeLink,
-                    activeName: this.props.activeName,
-                }
-            );
-        }
-    }
-
+    state ={
+        collapse:null,
+    };
 
     render() {
         return (
@@ -42,7 +25,10 @@ class Header extends Component {
 
                         <MDBNavbarNav right>
                             <MDBNavItem>
-                                <MDBNavLink to={this.state.activeLink}>{this.state.activeName}</MDBNavLink>
+                                {this.props.userInfo && this.props.userInfo.user_id ?
+                                    <MDBNavLink to={`/profile/${this.props.userInfo.user_id}`}>My profile</MDBNavLink>
+                                    : <MDBNavLink to="/login">Sign in</MDBNavLink>
+                                }
                             </MDBNavItem>
                         </MDBNavbarNav>
                     </MDBCollapse>

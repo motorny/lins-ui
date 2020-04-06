@@ -9,20 +9,15 @@ import AddItemForm from "./AddItemForm";
 
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          callback: this.props.callbackFromParent,
-        };
-    }
-
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={SearchContainer}/>
                 <Route path='/items/:id' component={ItemDetailedContainer}/>
                 <Route path='/items' component={ItemsContainer}/>
-                <Route path='/login' render={(props) => <Login {...props} callback={this.state.callback} />}/>
+                <Route path='/login'>
+                    <Login setUserInfo={this.props.setUserInfo}/>}/>
+                </Route>
                 <Route path='/profile' component={Profile}/>
                 <Route path='/additem' component={AddItemForm}/>
             </Switch>

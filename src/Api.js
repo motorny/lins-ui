@@ -66,5 +66,11 @@ export async function addNewItem(body) {
     });
 }
 
+export async function  login(body) {
+    const queryUrl = `${baseURL}/auth/`;
+    return doPost(queryUrl, body);
+}
+
+
 
 export const getImageUrl = (image_rel_url) => (`${baseURL}${image_rel_url}`);

@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import '../App.css';
-import {Button, Container} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Form from "react-bootstrap/Form";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import Cookie from 'js-cookie';
+import React, {Component} from 'react';
+import {MDBBtn} from "mdbreact";
+import {Link, withRouter} from 'react-router-dom';
+import {login} from "../Api";
+import {toast} from 'react-toastify';
+
 
 class Login extends Component {
     constructor(props) {
@@ -14,9 +11,7 @@ class Login extends Component {
         this.state = {
             login: '',
             password: '',
-            callback: this.props.callback,
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = event => {
@@ -25,70 +20,53 @@ class Login extends Component {
         });
     };
 
-    handleSubmit(event) {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        fetch('http://localhost:9000/auth' , {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(this.state),
-        })
-            .then((result) => result.json())
-            .then((info) => {
-                if(info.token) {
-                    this.props.history.push({
-                        pathname: '/profile/' + info.user_id,
-                        state: { token: info.token }
-                    });
-                    Cookie.set('token', info.token);
-                    Cookie.set('user_id', info.user_id);
-                    this.state.callback();
-                }
-                console.log(info);
+        const resp = await login({
+            login: this.state.login,
+            password: this.state.password
+        });
+        if (resp && resp.token) {
+            this.props.setUserInfo(resp);
+            toast.success(`Token expires ${resp.token_expire}`);
+            this.props.history.push({
+                pathname: '/profile/' + resp.user_id,
             });
-    }
+        }
+    };
 
     render() {
         return (
-            <Container>
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Account Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter account name"
-                                      id="login"
-                                      value={this.state.login}
-                                      onChange={this.handleChange}/>
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password"
-                                      id="password"
-                                      value={this.state.password}
-                                      onChange={this.handleChange}/>
-                    </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-                <Jumbotron>
-                    <h3>Do not have an account yet?</h3>
-                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Lol jk</Tooltip>}>
-                        <span className="d-inline-block">
-                            <Button disabled style={{ pointerEvents: 'none' }}>
-                            Click here to register
-                            </Button>
-                        </span>
-                        </OverlayTrigger>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="login" className="grey-text font-weight-light">
+                        Login
+                    </label>
+                    <input type="text" placeholder="Enter account name"
+                           id="login" className="form-control"
+                           value={this.state.login}
+                           onChange={this.handleChange}/>
+                    <br/>
+                    <label htmlFor="password" className="grey-text font-weight-light">
+                        Login
+                    </label>
+                    <input type="password" placeholder="Password"
+                           id="password" className="form-control"
+                           value={this.state.password}
+                           onChange={this.handleChange}/>
+                    <div className="text-center py-4 mt-3">
+                        <MDBBtn outline color="success" type="submit">
+                            Log in!
+                        </MDBBtn>
+                        <br/><br/>
+                        <h4>Do not have an account yet?</h4>
+                        <Link to={"/register"}>Click here to register</Link>
                     </div>
+                </form>
 
-                </Jumbotron>
-            </Container>
+            </div>
         );
     }
 }
 
-export default Login;
+export default withRouter(Login);
