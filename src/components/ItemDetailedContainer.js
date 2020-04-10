@@ -24,7 +24,7 @@ class ItemDetailedContainer extends Component {
 
     render() {
         return (
-            <ItemDetailed item={this.state.item}/>
+            <ItemDetailed item={this.state.item} userInfo={this.props.userInfo}/>
         );
     }
 }

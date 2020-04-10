@@ -10,14 +10,26 @@ import {
     MDBCardBody,
     MDBCardTitle,
     MDBBadge,
-    MDBCardText,
+    MDBCardText, MDBBtn,
 } from 'mdbreact';
 import './ItemDetailed.css'
 import ProfileHover from "./ProfileHover";
 import {getImageUrl} from "../Api";
+import {withRouter} from 'react-router-dom';
+import {toast} from "react-toastify";
+import {deleteItem} from "../Api";
 
 class ItemDetailed extends Component {
 
+    deleteItem = async () => {
+        const resp = await deleteItem(this.props.item.id);
+        if (resp) {
+            toast.success(`Item deleted`);
+            this.props.history.push({
+                pathname: '/items',
+            });
+        }
+    };
 
     render() {
         if (!this.props.item)
@@ -60,9 +72,19 @@ class ItemDetailed extends Component {
                 </MDBRow>
                 <MDBRow>
                     <MDBCol>
+                        {this.props.item && this.props.userInfo && this.props.item.owner &&
+                         this.props.item.owner.id === this.props.userInfo.user_id &&
+                        <div className="px-5">
+                            <MDBBtn onClick={this.deleteItem} outline color="danger">
+                                Delete
+                            </MDBBtn>
+                        </div>}
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                    <MDBCol>
                         <MDBCardBody>
                             <MDBCardText>
-
                                 {this.props.item.description}
                             </MDBCardText>
                         </MDBCardBody>
@@ -75,4 +97,4 @@ class ItemDetailed extends Component {
     }
 }
 
-export default ItemDetailed;
+export default withRouter(ItemDetailed);

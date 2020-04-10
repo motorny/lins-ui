@@ -42,13 +42,12 @@ class App extends Component {
         const token = Cookies.get('token');
         const tokenExpire = Cookies.get('token_expire');
         const dateExpire = tokenExpire && new Date(tokenExpire);
-        console.log('loaded expiration', dateExpire);
         const dateNow = new Date();
         if (token && dateExpire && dateExpire > dateNow) {
             this.setState({
                 userInfo: {
                     token: token,
-                    user_id: Cookies.get('user_id'),
+                    user_id: parseInt(Cookies.get('user_id')),
                     token_expire: dateExpire
                 }
             })
@@ -65,7 +64,7 @@ class App extends Component {
                 <div>
                     <Header userInfo={this.state.userInfo} logout={this.logout}/>
                     <MDBContainer className="mt-5 pt-5">
-                        <Main setUserInfo={this.setUserInfo}/>
+                        <Main userInfo={this.state.userInfo} setUserInfo={this.setUserInfo}/>
                         <ToastContainer hideProgressBar={true}/>
                     </MDBContainer>
                 </div>

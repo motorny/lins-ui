@@ -9,11 +9,14 @@ import AddItemForm from "./AddItemForm";
 
 
 class Main extends Component {
+
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={SearchContainer}/>
-                <Route path='/items/:id' component={ItemDetailedContainer}/>
+                <Route path='/items/:id'>
+                    <ItemDetailedContainer userInfo={this.props.userInfo}/>
+                </Route>
                 <Route path='/items' component={ItemsContainer}/>
                 <Route path='/login'>
                     <Login setUserInfo={this.props.setUserInfo}/>}/>

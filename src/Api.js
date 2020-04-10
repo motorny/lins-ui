@@ -38,6 +38,22 @@ async function doPost(...args) {
     return null;
 }
 
+async function doDelete(...args) {
+    const resp = await instance.delete(...args).catch((error) => {
+        if (error.response) {
+            toast.error(`${error.response.status}: ${error.response.data.message || error.response.data}`);
+        } else {
+            toast.error(error.message);
+        }
+        return null;
+    });
+    if (resp) {
+        return resp.data
+    }
+    return null;
+}
+
+
 
 export async function getItems(filter, offset, limit) {
     let queryUrl = `${baseURL}/items?offset=${offset || 0}`;
@@ -66,11 +82,22 @@ export async function addNewItem(body) {
     });
 }
 
-export async function  login(body) {
+export async function login(body) {
     const queryUrl = `${baseURL}/auth/`;
     return doPost(queryUrl, body);
 }
 
 
+export async function deleteItem(itemID) {
+    const queryUrl = `${baseURL}/items/${itemID}`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doDelete(queryUrl, {
+        headers: {Authorization: "Bearer " + token}
+    });
+}
 
 export const getImageUrl = (image_rel_url) => (`${baseURL}${image_rel_url}`);
