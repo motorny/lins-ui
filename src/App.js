@@ -30,10 +30,19 @@ class App extends Component {
             }});
     };
 
+    logout = () => {
+        console.log("Logout");
+        Cookies.remove('token');
+        Cookies.remove('token_expire');
+        Cookies.remove('user_id');
+        this.setState({userInfo: null});
+    };
+
     componentDidMount() {
         const token = Cookies.get('token');
         const tokenExpire = Cookies.get('token_expire');
         const dateExpire = tokenExpire && new Date(tokenExpire);
+        console.log('loaded expiration', dateExpire);
         const dateNow = new Date();
         if (token && dateExpire && dateExpire > dateNow) {
             this.setState({
@@ -54,7 +63,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Header userInfo={this.state.userInfo}/>
+                    <Header userInfo={this.state.userInfo} logout={this.logout}/>
                     <MDBContainer className="mt-5 pt-5">
                         <Main setUserInfo={this.setUserInfo}/>
                         <ToastContainer hideProgressBar={true}/>
