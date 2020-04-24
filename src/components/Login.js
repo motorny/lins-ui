@@ -60,10 +60,9 @@ class Login extends Component {
                         </MDBBtn>
                         <br/><br/>
                         <h4>Do not have an account yet?</h4>
-                        <Link to={"/register"}>Click here to register</Link>
+                        <Link to="/register">Click here to register</Link>
                     </div>
                 </form>
-
             </div>
         );
     }

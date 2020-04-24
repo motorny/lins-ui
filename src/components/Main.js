@@ -19,7 +19,7 @@ class Main extends Component {
                 </Route>
                 <Route path='/items' component={ItemsContainer}/>
                 <Route path='/login'>
-                    <Login setUserInfo={this.props.setUserInfo}/>}/>
+                    <Login setUserInfo={this.props.setUserInfo}/>
                 </Route>
                 <Route path='/profile' component={Profile}/>
                 <Route path='/additem' component={AddItemForm}/>
