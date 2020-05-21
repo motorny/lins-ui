@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
 import ItemsList from "./ItemsList";
+import {getProfile} from "../Api";
 
 
 class Profile extends Component {
@@ -19,58 +20,45 @@ class Profile extends Component {
             points: 0,
             createdAt: 0,
             items: [],
-            perPage: 2,
-            offset: 0,
             pagesCnt: 0,
             loading: true,
         }
-        //Cookie.get('token');
     }
 
 
-    updateData = async () => {
-        this.setState({loading: true});
-        await new Promise((resolve) => {
+    updateData = async (user_id) => {
+        this.setState({loading: true, user_id: user_id});
+        /*await new Promise((resolve) => {
             setTimeout(resolve, 500);
+        });*/
+        const info = await getProfile(user_id);
+        const i_pagesCnt = Math.max(1,Math.ceil(info.items.length / this.state.perPage));
+        this.setState({
+            user_id: user_id,
+            avatar: info.user.image,
+            gradientPic: pic, //TODO
+            username: info.user.username,
+            location: info.user.location,
+            role: info.user.isAdmin,
+            contact: info.user.contact,
+            points: info.user.points,
+            createdAt: info.user.createdAt,
+            items: info.items,
+            pagesCnt: i_pagesCnt,
         });
         this.setState({loading: false});
     };
 
-
-
-//}
-
-//componentWillReceiveProps(nextProps, nextContext) {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const user_id = this.props.history.location.pathname.match(/(\d+)/)[0];
-        fetch('http://localhost:9000/profile/' + user_id , {
-            method: "GET",
-            headers: {
-                'Content-type': 'application/json'
-            },
-        })
-            .then((result) => result.json())
-            .then((info) =>  {
-                console.log(info);
-                const i_pagesCnt = Math.max(1,Math.ceil(info.items.length / this.state.perPage));
-                this.setState({
-                    user_id: user_id,
-                    avatar: info.user.image,
-                    gradientPic: pic, //TODO
-                    username: info.user.username,
-                    location: info.user.location,
-                    role: info.user.isAdmin,
-                    contact: info.user.contact,
-                    points: info.user.points,
-                    createdAt: info.user.createdAt,
-                    items: info.items,
-                    pagesCnt: i_pagesCnt,
-                });
-            });
+        if(this.state.user_id !== user_id)
+        {
+           this.updateData(user_id);
+        }
     }
 
     componentDidMount() {
-        this.updateData();
+        this.setState({loading: true});
     }
 
     render() {
