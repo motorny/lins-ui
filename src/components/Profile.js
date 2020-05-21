@@ -22,12 +22,26 @@ class Profile extends Component {
             perPage: 2,
             offset: 0,
             pagesCnt: 0,
+            loading: true,
         }
         //Cookie.get('token');
     }
 
 
-    componentWillReceiveProps(nextProps, nextContext) {
+    updateData = async () => {
+        this.setState({loading: true});
+        await new Promise((resolve) => {
+            setTimeout(resolve, 500);
+        });
+        this.setState({loading: false});
+    };
+
+
+
+//}
+
+//componentWillReceiveProps(nextProps, nextContext) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         const user_id = this.props.history.location.pathname.match(/(\d+)/)[0];
         fetch('http://localhost:9000/profile/' + user_id , {
             method: "GET",
@@ -55,9 +69,22 @@ class Profile extends Component {
             });
     }
 
+    componentDidMount() {
+        this.updateData();
+    }
 
     render() {
         return (
+            <div>
+            {this.state.loading ?
+                    (
+                        <div>
+                            <div className="spinner-border text-success" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                            Loading...
+                        </div>
+                    ) : (
             <MDBContainer>
                 <MDBRow>
                     <MDBCol>
@@ -90,7 +117,8 @@ class Profile extends Component {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-
+                    )}
+            </div>
         );
     }
 }
