@@ -100,4 +100,9 @@ export async function deleteItem(itemID) {
     });
 }
 
+export async function getProfile(userID) {
+    const queryUrl = `${baseURL}/profile/${userID}`;
+    return doGet(queryUrl);
+}
+
 export const getImageUrl = (image_rel_url) => (`${baseURL}${image_rel_url}`);
