@@ -59,7 +59,7 @@ class StoragesContainer extends Component {
                         </div>
                     ) : (
                         <div>
-                            {storagesData.totalCnt ? storagesData.storages.map((storage, i) => {
+                            {storagesData ? storagesData.storages.map((storage, i) => {
                                 return <StorageCard storage={storage} key={i}/>;
                             }) : (<span>Nothing to show</span>)}
                         </div>

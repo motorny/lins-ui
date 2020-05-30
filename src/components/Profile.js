@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
 import ItemsList from "./ItemsList";
+import StoragesList from "./StoragesList";
 import {getProfile} from "../Api";
 
 
@@ -44,6 +45,7 @@ class Profile extends Component {
             points: info.user.points,
             createdAt: info.user.createdAt,
             items: info.items,
+            storages: info.storages,
             pagesCnt: i_pagesCnt,
         });
         this.setState({loading: false});
@@ -101,6 +103,13 @@ class Profile extends Component {
                             <div className="card-body">
                                 <ItemsList pagination={false} data={this.state.items}/>
                             </div>
+                            <div className="card-header">
+                                Storages
+                            </div>
+                            <div className="card-body">
+                                <StoragesList pagination={false} data={this.state.storages}/>
+                            </div>
+
                         </div>
                     </MDBCol>
                 </MDBRow>

@@ -14,7 +14,7 @@ class AddStoreForm extends Component {
         name: "",
         location: "",
         description: "",
-        owner_id: null,
+        owner_id: 2,
     };
 
     onSubmit = async (event) => {
@@ -83,7 +83,7 @@ class AddStoreForm extends Component {
                     <label htmlFor="defaultFormContactMessageEx" className="grey-text">
                         Owner
                     </label>
-                    <textarea type="text" id="defaultFormContactMessageEx" className="form-control" rows="3"
+                    <input type="number" id="defaultFormContactMessageEx" className="form-control"
                               value={this.state.owner_id}
                               onChange={this.onChangeOwnerId}/>
 
