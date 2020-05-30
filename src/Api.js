@@ -70,8 +70,25 @@ export async function getItemDetails(itemID) {
     return doGet(queryUrl);
 }
 
+export async function getComments(itemID) {
+    const queryUrl = `${baseURL}/comments/${itemID}`;
+    return doGet(queryUrl);
+}
+
 export async function addNewItem(body) {
     const queryUrl = `${baseURL}/items/`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doPost(queryUrl, body, {
+        headers: {Authorization: "Bearer " + token}
+    });
+}
+
+export async function addNewComment(body) {
+    const queryUrl = `${baseURL}/comments/`;
     const token = Cookies.get('token');
     if (!token) {
         toast.error("Not authorized!");
@@ -87,6 +104,17 @@ export async function login(body) {
     return doPost(queryUrl, body);
 }
 
+export async function deleteComment(commentID) {
+    const queryUrl = `${baseURL}/comments/${commentID}`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doDelete(queryUrl, {
+        headers: {Authorization: "Bearer " + token}
+    });
+}
 
 export async function deleteItem(itemID) {
     const queryUrl = `${baseURL}/items/${itemID}`;
