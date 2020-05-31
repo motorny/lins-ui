@@ -27,7 +27,7 @@ class ItemDetailedContainer extends Component {
 
     render() {
         return (
-            <div><ItemDetailed item={this.state.item} userInfo={this.props.userInfo}/>
+            <div><ItemDetailed item={this.state.item} userInfo={this.props.userInfo} editItem={this.props.editItem}/>
                 <CommentsList comments={this.state.comments} item_id={this.props.match.params.id}
                               user_id={this.props.userInfo && this.props.userInfo.user_id}/></div>
         );

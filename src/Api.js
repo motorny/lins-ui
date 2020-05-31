@@ -38,6 +38,21 @@ async function doPost(...args) {
     return null;
 }
 
+async function doPut(...args) {
+    const resp = await instance.put(...args).catch((error) => {
+        if (error.response) {
+            toast.error(`${error.response.status}: ${error.response.data.message || error.response.data}`);
+        } else {
+            toast.error(error.message);
+        }
+        return null;
+    });
+    if (resp) {
+        return resp.data
+    }
+    return null;
+}
+
 async function doDelete(...args) {
     const resp = await instance.delete(...args).catch((error) => {
         if (error.response) {
@@ -163,6 +178,19 @@ export async function deleteStorage(storageID) {
 export async function getProfile(userID) {
     const queryUrl = `${baseURL}/profile/${userID}`;
     return doGet(queryUrl);
+}
+
+
+export async function editItem(id, body) {
+    const queryUrl = `${baseURL}/items/${id}`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doPut(queryUrl, body, {
+        headers: {Authorization: "Bearer " + token}
+    });
 }
 
 export const getImageUrl = (image_rel_url) => (`${baseURL}${image_rel_url}`);

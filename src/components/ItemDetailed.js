@@ -31,6 +31,7 @@ class ItemDetailed extends Component {
         }
     };
 
+
     render() {
         if (!this.props.item)
             return (<span>Loading...</span>);
@@ -73,10 +74,18 @@ class ItemDetailed extends Component {
                 <MDBRow>
                     <MDBCol>
                         {this.props.item && this.props.userInfo && this.props.item.owner &&
-                         this.props.item.owner.id === this.props.userInfo.user_id &&
+                        this.props.item.owner.id === this.props.userInfo.user_id &&
                         <div className="px-5">
                             <MDBBtn onClick={this.deleteItem} outline color="danger">
                                 Delete
+                            </MDBBtn>
+                            <MDBBtn onClick={() => {
+                                this.props.editItem(this.props.item);
+                                this.props.history.push({
+                                    pathname: `/items/${this.props.item.id}/edit`,
+                                });
+                            }} outline color="warning">
+                                Edit
                             </MDBBtn>
                         </div>}
                     </MDBCol>
