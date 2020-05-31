@@ -14,12 +14,11 @@ class CommentsList extends Component {
             return (<span>Loading...</span>);
         return (
             <div>
-                <MDBCard>
-                    <h1>Comments</h1>
+                    <h3 className="text-center my-2">Comments</h3>
                     {comments.count ? comments.comments.map((comment, i) => {
                         return <CommentCard comment={comment} key={i} user_id = {this.props.user_id}/>;
                     }) : (<span>No comments yet</span>)}
-                </MDBCard>
+
                 <MDBCard>
                     <AddCommentForm item_id = {this.props.item_id} user_id = {this.props.user_id}/>
                 </MDBCard>

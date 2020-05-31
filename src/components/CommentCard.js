@@ -21,13 +21,15 @@ class CommentCard extends Component {
         const comment = this.props.comment;
         return (
             <MDBCard className="d-flex flex-row flex-wrap my-3">
-                <MDBCardBody>
-                    <MDBCardTitle >
-                        {comment.title || 'No title, kek...'}
-                    </MDBCardTitle>
-                    <MDBCardText>
-                        {comment.comment || 'No comment yet...'}
-                    </MDBCardText>
+                <MDBCardBody className="d-flex flex-row justify-content-between">
+                    <div>
+                        <MDBCardTitle>
+                            {comment.title || 'No title, kek...'}
+                        </MDBCardTitle>
+                        <MDBCardText>
+                            {comment.comment || 'No comment yet...'}
+                        </MDBCardText>
+                    </div>
                     {this.props.comment.user_id === this.props.user_id &&
                     <MDBBtn onClick={this.deleteComment} outline color="danger">
                         Delete
