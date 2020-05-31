@@ -21,6 +21,12 @@ class Header extends Component {
                             <MDBNavItem>
                                 <MDBNavLink to="/additem">Add new item</MDBNavLink>
                             </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/storages">Storages</MDBNavLink>
+                            </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/addstorage">Add new Storage</MDBNavLink>
+                            </MDBNavItem>
                         </MDBNavbarNav>
 
                         <MDBNavbarNav right>

@@ -53,8 +53,6 @@ async function doDelete(...args) {
     return null;
 }
 
-
-
 export async function getItems(filter, offset, limit) {
     let queryUrl = `${baseURL}/items?offset=${offset || 0}`;
     if (limit)
@@ -63,6 +61,28 @@ export async function getItems(filter, offset, limit) {
         queryUrl = queryUrl + `&filter=${filter}`;
     return doGet(queryUrl);
 
+}
+
+export async function getStorages(owner_id) {
+    let queryUrl = `${baseURL}/storages?owner_id=${owner_id || 1}`;
+    return doGet(queryUrl);
+}
+
+export async function addNewStorage(body) {
+    const queryUrl = `${baseURL}/storages/`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doPost(queryUrl, body, {
+        headers: {Authorization: "Bearer " + token}
+    });
+}
+
+export async function getStorageDetails(storageID) {
+    const queryUrl = `${baseURL}/storages/${storageID}`;
+    return doGet(queryUrl);
 }
 
 export async function getItemDetails(itemID) {
@@ -118,6 +138,18 @@ export async function deleteComment(commentID) {
 
 export async function deleteItem(itemID) {
     const queryUrl = `${baseURL}/items/${itemID}`;
+    const token = Cookies.get('token');
+    if (!token) {
+        toast.error("Not authorized!");
+        return null;
+    }
+    return doDelete(queryUrl, {
+        headers: {Authorization: "Bearer " + token}
+    });
+}
+
+export async function deleteStorage(storageID) {
+    const queryUrl = `${baseURL}/storages/${storageID}`;
     const token = Cookies.get('token');
     if (!token) {
         toast.error("Not authorized!");
