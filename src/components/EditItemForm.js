@@ -23,7 +23,6 @@ class EditItemForm extends Component {
 
 
     onSubmit = async (event) => {
-        console.log(this.state);
         const body = {};
         if (this.state.name)
             body.name = this.state.name;

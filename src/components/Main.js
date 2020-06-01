@@ -3,6 +3,7 @@ import ItemsContainer from './ItemsContainer';
 import StoragesContainer from './StoragesContainer';
 import {Switch, Route} from "react-router-dom";
 import Login from "./Login";
+import Register from "./Register"
 import Profile from './Profile';
 import SearchContainer from './SearchContainer';
 import ItemDetailedContainer from "./ItemDetailedContainer";
@@ -41,6 +42,7 @@ class Main extends Component {
                 <Route path='/login'>
                     <Login setUserInfo={this.props.setUserInfo}/>
                 </Route>
+                <Route path='/register' component={Register}/>
                 <Route path='/profile' component={Profile}/>
                 <Route path='/additem' component={AddItemForm}/>
                 <Route path='/addstorage' component={AddStoreForm}/>

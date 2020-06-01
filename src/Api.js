@@ -139,6 +139,11 @@ export async function login(body) {
     return doPost(queryUrl, body);
 }
 
+export async function register(body) {
+    const queryUrl = `${baseURL}/users/`;
+    return doPost(queryUrl, body);
+}
+
 export async function deleteComment(commentID) {
     const queryUrl = `${baseURL}/comments/${commentID}`;
     const token = Cookies.get('token');
