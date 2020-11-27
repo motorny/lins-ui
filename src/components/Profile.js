@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import pic from './bg1.jpg';
 import ItemsList from "./ItemsList";
+import StoragesList from "./StoragesList";
+import {getProfile} from "../Api";
 
 
 class Profile extends Component {
@@ -19,45 +21,60 @@ class Profile extends Component {
             points: 0,
             createdAt: 0,
             items: [],
-            perPage: 2,
-            offset: 0,
             pagesCnt: 0,
+            loading: true,
         }
-        //Cookie.get('token');
     }
 
 
-    componentWillReceiveProps(nextProps, nextContext) {
+    updateData = async (user_id) => {
+        this.setState({loading: true, user_id: user_id});
+        /*await new Promise((resolve) => {
+            setTimeout(resolve, 500);
+        });*/
+        const info = await getProfile(user_id);
+        const i_pagesCnt = Math.max(1,Math.ceil(info.items.length / this.state.perPage));
+        this.setState({
+            user_id: user_id,
+            avatar: info.user.image,
+            gradientPic: pic, //TODO
+            username: info.user.username,
+            location: info.user.location,
+            role: info.user.isAdmin,
+            contact: info.user.contact,
+            points: info.user.points,
+            createdAt: info.user.createdAt,
+            items: info.items,
+            storages: info.storages,
+            pagesCnt: i_pagesCnt,
+        });
+        this.setState({loading: false});
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
         const user_id = this.props.history.location.pathname.match(/(\d+)/)[0];
-        fetch('http://localhost:9000/profile/' + user_id , {
-            method: "GET",
-            headers: {
-                'Content-type': 'application/json'
-            },
-        })
-            .then((result) => result.json())
-            .then((info) =>  {
-                console.log(info);
-                const i_pagesCnt = Math.max(1,Math.ceil(info.items.length / this.state.perPage));
-                this.setState({
-                    user_id: user_id,
-                    avatar: info.user.image,
-                    gradientPic: pic, //TODO
-                    username: info.user.username,
-                    location: info.user.location,
-                    role: info.user.isAdmin,
-                    contact: info.user.contact,
-                    points: info.user.points,
-                    createdAt: info.user.createdAt,
-                    items: info.items,
-                    pagesCnt: i_pagesCnt,
-                });
-            });
+        if(this.state.user_id !== user_id)
+        {
+           this.updateData(user_id);
+        }
     }
 
+    componentDidMount() {
+        this.setState({loading: true});
+    }
 
     render() {
         return (
+            <div>
+            {this.state.loading ?
+                    (
+                        <div>
+                            <div className="spinner-border text-success" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                            Loading...
+                        </div>
+                    ) : (
             <MDBContainer>
                 <MDBRow>
                     <MDBCol>
@@ -86,11 +103,19 @@ class Profile extends Component {
                             <div className="card-body">
                                 <ItemsList pagination={false} data={this.state.items}/>
                             </div>
+                            <div className="card-header">
+                                Storages
+                            </div>
+                            <div className="card-body">
+                                <StoragesList pagination={false} data={this.state.storages}/>
+                            </div>
+
                         </div>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-
+                    )}
+            </div>
         );
     }
 }
